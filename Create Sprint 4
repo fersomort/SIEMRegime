@@ -1,0 +1,20 @@
+<h1>Sprint 4</h1>
+
+<h2>Design and Implementation of a Cloud-Based SIEM</h2>
+
+<p> In this technical documentation, we outline the design and implementation of a cloud-based Security Information and Event Management (SIEM) solution, known as SIEM Regime. Our team members Emmaneul Apietu, Shantericka Greene, and Fernanda Somohano, have diligently worked on integrating key components such as S3 buckets, databases, IAM roles, and robust incident response playbooks to enhance security operations within our organization. During this sprint we were able to set up two availability zones, one in Ohio and the other in Virginia. Each availability zone has two EC2 instances, a public and private, and a load balancer attached. The load balancer will take over if either of the availability zones experiences an outage within the zone. A Web Application Firewall was also created to safeguard our organization’s website and its underlying web applications from potential threats and vulnerabilities.</p>
+
+<h5>SOAR Tool Selection and Integration:</h5>
+<p>For the automation and orchestration of security processes, we have chosen to leverage an S3 bucket and a database as our primary SOAR tools. These components interact and automate actions with key assets such as EC2 instances, GuardDuty, and CloudFront within our AWS environment. The integration process involved setting up two availability zones, IAM roles, and ensuring seamless interactions between the SOAR tools and SIEM infrastructure for enhanced operational efficiency.</p>
+
+<h5>IAM Roles and Security Integration:</h5>
+<p>IAM roles play a critical role in ensuring secure access to S3 buckets and databases within our SIEM environment. By defining and assigning specific IAM roles to resources, we enforce role-based access controls and uphold the principle of least privilege. This robust security measure ensures that only authorized users and services can interact with sensitive data, reducing the risk of unauthorized access or data breaches within our infrastructure.</p>
+
+<h5>Incident Response Playbooks:</h5>
+<p>Our incident response playbooks are designed to address a wide range of security incidents, including malware infections and data breaches. By automating threat detection, containment, analysis, and response processes, we effectively streamline incident response efforts and mitigate security risks proactively. The incorporation of notification escalation procedures ensures timely alerts and coordinated responses to security incidents.</p>
+
+<h5>S3 Bucket and Database Integration:</h5>
+<p>In our implementation, we have established an S3 bucket for centralized storage of logs, incident reports, and security-related data. Similarly, we have utilized an RDS database to store threat intelligence feeds, IoCs, and pertinent security information. Encryption, access controls, and IAM policies are implemented to secure the data and uphold data integrity within our SIEM infrastructure.</p>
+
+<p>The seamless integration of IAM roles, S3 buckets, databases, and incident response playbooks has significantly improved our security operations within the SIEM Regime. By proactively monitoring, detecting, and responding to security incidents, we fortify our defenses against evolving cyber threats and ensure the resilience of our security posture.</p>
+
