@@ -21,23 +21,23 @@ Create Bastion
 Create Private Subnet
 
   1.Subnet Name: siemtestprivate; 10.10.10.0/24
-  Routing Table: siemtest-RT-private; 
-  vpc siem vpc
-  routes table-private edit the route; add 0.0.0.0/0; then internet gateway IGW save (edit to natgateway later)
-  Edit route table association; subnet private RT; save
+  2.Routing Table: siemtest-RT-private; 
+  3.vpc siem vpc
+  4.routes table-private edit the route; add 0.0.0.0/0; then internet gateway IGW save (edit to natgateway later)
+  5.Edit route table association; subnet private RT; save
 
 Create new NACLS
 
-  Siemtest-NACL; select vpc; then create
-  Select private nacl; subnet association; select private then save
-  NACL; select siemtest nacl; select inbound rules then edit: add new rule (100) type ssh 22, source 10.10.0.0/24; allow
-  Add new rule 200; type custom tcp; port range 1024-65535; source 0.0.0.0/0 allow; save.
-  Go to inbound rules below: should show allow allow deny 
+  1.Siemtest-NACL; select vpc; then create
+  2.Select private nacl; subnet association; select private then save
+  3.NACL; select siemtest nacl; select inbound rules then edit: add new rule (100) type ssh 22, source 10.10.0.0/24; allow
+  4.Add new rule 200; type custom tcp; port range 1024-65535; source 0.0.0.0/0 allow; save.
+  5.Go to inbound rules below: should show allow allow deny 
 
 Create new private EC2 instance
 
-  Select siemtest-ec2-private; amazon linux; t.2 micro; keypair(siemtest); vpc-siemtestvpc disable; security group: siemtest-ec2-private; security group rules type ssh, source type: custom; source: siemtest-bastion; add another security group rule: type: https; source type: custom; source type: 10.10.20.0/24 (public); then launch.
-  Security; inbound rules; ssh sg security group rules double check they point into each other.
+  1.Select siemtest-ec2-private; amazon linux; t.2 micro; keypair(siemtest); vpc-siemtestvpc disable; security group: siemtest-ec2-private; security group rules type ssh, source type: custom; source: siemtest-bastion; add another security group rule: type: https; source type: custom; source type: 10.10.20.0/24 (public); then launch.
+  2.Security; inbound rules; ssh sg security group rules double check they point into each other.
   
 Follow up ended with checking the VPC dashboard, ensuring our security groups names should be the same as the security group ID name to limit confusion.
 
