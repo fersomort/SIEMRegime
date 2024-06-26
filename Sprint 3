@@ -1,4 +1,53 @@
-<h1>Sprint 3</h1>
+SIEM REGIME: DESIGN AND IMPLEMENTATION OF A CLOUD-BASED SIEM
 
-<h2>SIEM REGIME: DESIGN AND IMPLEMENTATION OF A CLOUD-BASED SIEM</h2>
+This Sprint we were assigned to create private and public EC2 instances on our AWS accounts within two availability zones. We also were to attach a bastion host and an S3 bucket for security measures. In the process of checking our instance's connections we came across connectivity errors. After hours long research and the deadline approaching we reach out for assistance. Below I have attached our step by step process for our setup. I have also attached screenshots of our workload that shows connectivity at one point and then it was lost due to AWS errors.
+
+Below is the step by step process for creating our VPCs, Bastion host, private subnets, NACLs, private EC2 instance, security groups, and allowing inbound, and outbound rules. 
+
+We created a VPCs created to troubleshoot previous EC2 connectivity issues between public and private instances.
+
+  1.Internet gateway recreated (SIEMtestIG):
+  2.Created public subnet 10.10.20.0./24,
+  3.Routing table for (public) Siem-RT-public: route table settings: routes then edit routes, 0.0.0.0/0 internet gateway, save changes
+  4.Subnets then select public subnet, then edit route table association, select PublicRT 10.10.0.0/16 then save.
+
+Create Bastion
+
+  1.Create EC2 instance: siemtest-bastion-public;
+  2.Key pair created: siemtest; used amazon linux
+  3.Create new security group: siemtest-bastion-public; 
+  4.Launch
+
+Create Private Subnet
+
+  1.Subnet Name: siemtestprivate; 10.10.10.0/24
+  Routing Table: siemtest-RT-private; 
+  vpc siem vpc
+  routes table-private edit the route; add 0.0.0.0/0; then internet gateway IGW save (edit to natgateway later)
+  Edit route table association; subnet private RT; save
+
+Create new NACLS
+
+  Siemtest-NACL; select vpc; then create
+  Select private nacl; subnet association; select private then save
+  NACL; select siemtest nacl; select inbound rules then edit: add new rule (100) type ssh 22, source 10.10.0.0/24; allow
+  Add new rule 200; type custom tcp; port range 1024-65535; source 0.0.0.0/0 allow; save.
+  Go to inbound rules below: should show allow allow deny 
+
+Create new private EC2 instance
+
+  Select siemtest-ec2-private; amazon linux; t.2 micro; keypair(siemtest); vpc-siemtestvpc disable; security group: siemtest-ec2-private; security group rules type ssh, source type: custom; source: siemtest-bastion; add another security group rule: type: https; source type: custom; source type: 10.10.20.0/24 (public); then launch.
+  Security; inbound rules; ssh sg security group rules double check they point into each other.
+  
+Follow up ended with checking the VPC dashboard, ensuring our security groups names should be the same as the security group ID name to limit confusion.
+
+Select security group bastion edit outbound rules; click add rule to restrict outbound; type ssh; protocol tcp; port range 22; destination custom type in EC2private security group; then save.
+
+Go back to the security bastion and edit outbound rules to add rule and delete all traffic rule.
+
+Try SSH to connect to the bastion instance. Bash was used and was still unsuccessful. 
+
+*Pitched IDEA: create ec2 in another region for availability zone 2*
+
+Below are some screenshots during our trial and error from research over the weekend.
 
