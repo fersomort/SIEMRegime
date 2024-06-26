@@ -1,0 +1,127 @@
+<h2>Sprint 2</h2>
+
+
+<h4>SIEM REGIME AWS COMPREHENSIVE BREAKDOWN</h4>
+
+<p>
+SIEM REGIME has created roles, users, groups, policies, and permissions for each organization
+to utilize and control.
+
+An IAM role is a set of permissions that can be assumed by an entity, such as a user, application,
+or service. Roles are not users, but rather a set of permissions that can be granted to a user or
+service. Roles are used to grant access to AWS resources without sharing the user's credentials.
+
+An IAM user is a unique identity within your AWS account. Users are used to authenticate with
+AWS services and can be granted access to specific resources. Each user has a unique username
+and password and can be associated with one or more roles.
+
+An IAM group is a collection of IAM users that you can manage as a single unit. Groups can be
+used to simplify access management and make it easier to manage permissions for multiple
+users.
+
+An IAM policy is a set of permissions that define what actions can be performed on specific
+resources. Policies can be attached to IAM users, groups, or roles, and can be used to grant or
+deny access to specific AWS resources.
+<br>
+Permissions are the specific actions that can be performed on AWS resources. There are two
+types of permissions: <br>
+</p>
+<p>
+
+1. Actions: Specific actions that can be performed on an AWS resource, such as "S3: List Buckets" or "EC2: Describe Instances".<br>
+2. Resources: The specific AWS resources that the actions can be performed on, such as a specific S3 bucket or an EC2 instance.
+
+
+SIEM functionalities and secure virtual network architecture within the cloud platform is used to
+segregate SIEM components and manage data access for AWS. The following will be considered
+as components:
+
+<h5>Network Segmentation:</h5>
+
+Create multiple virtual private clouds (VPCs) to segregate SIEM components, each with its own
+security group and network ACLs. This will help prevent lateral movement in case of a breach.
+
+Attached below are photos from our AWS to display VPCs setup
+</p>
+
+![Screenshot 2024-06-26 154256](https://github.com/fersomort/SIEMRegime/assets/111290379/79bbbf97-4c9c-4058-b8b5-b760030dd47e)
+
+![Screenshot 2024-06-26 162818](https://github.com/fersomort/SIEMRegime/assets/111290379/e8658243-744f-4443-9c9d-ae5c29126f11)
+
+![Screenshot 2024-06-26 162900](https://github.com/fersomort/SIEMRegime/assets/111290379/79dc697e-f3ff-4bff-a66a-2e9b45c4ce7b)
+
+<p>
+<h5>Subnets:</h5>
+
+Create separate subnets for each SIEM component, such as: <br>
+● Log collection (e.g., CloudWatch logs, AWS Config logs) <br>
+● Log analysis and correlation<br>
+● Alerting and notification <br>
+● Data storage and retention <br>
+Attached below is our AWS account subnets from the VPC. <br>
+
+<h5>IAM Roles:</h5> 
+Assign specific IAM roles to each SIEM component to control access to resources and services. <br>
+For example: <br>
+● A log collection role with read-only access to CloudWatch logs <br>
+● A log analysis role with read-only access to S3 buckets containing log data <br>
+● An alerting role with write access to SNS topics for notifications <br>
+Role-Based Access Control (RBAC) for SIEM (Security Information and Event Management) is <br>
+a critical component of securing and managing access to sensitive security-related data. 
+
+<h5>RBAC Examples:</h5> 
+● Security Analyst Role: This role has permissions to view logs, configure alerts, and access sensitive data. <br>
+● Network Administrator Role: This role has permissions to manage network devices, configure network settings, and access sensitive data. <br>
+● Compliance Officer Role: This role has permissions to view logs, configure alerts, and access sensitive data for compliance purposes. <br>
+By implementing RBAC in a SIEM system, organizations can improve security, simplify management, and ensure compliance with regulatory requirements. <br>
+
+<h5>IAM Policies:</h5>
+Create IAM policies to define the permissions for each SIEM component. <br>
+For example: <br>
+● A policy that allows a log collection role to read CloudWatch logs <br>
+● A policy that allows a log analysis role to read S3 buckets containing log data <br>
+● A policy that allows an alerting role to write to SNS topics <br>
+Attached is a photo from our AWS account showing a user with limited permissions <br>
+</p>
+
+![Screenshot 2024-06-26 165759](https://github.com/fersomort/SIEMRegime/assets/111290379/7ac62905-a20d-4bcb-90a7-42dc0a2f8264)
+
+<p>
+<h5>Network Access Control Lists (ACLs):</h5>
+Configure network ACLs to control incoming and outgoing traffic between subnets and VPCs. <br>
+For example: <br>
+● Allow incoming traffic from the internet to the log collection subnet <br>
+● Allow outgoing traffic from the log analysis subnet to the data storage subnet <br>
+● Deny all incoming traffic from the internet to the data storage subnet <br>
+Attached below is a photo from our AWS account to display the NACLs. <br>
+</p>
+
+![Screenshot 2024-06-26 165842](https://github.com/fersomort/SIEMRegime/assets/111290379/280eaa09-a0e4-4932-89c5-61d945ffe9b3)
+
+<p>
+<h5>Security Groups: </h5>
+Configure security groups for each subnet to control incoming and outgoing traffic. <br>
+For example: <br>
+● Allow incoming traffic from trusted IP addresses or AWS services to the log collection subnet <br>
+● Allow outgoing traffic from the log analysis subnet to the data storage subnet <br>
+● Deny all incoming traffic from the internet to the data storage subnet <br>
+Attached below is a photo from our AWS account for users with permissions. <br>
+</p>
+
+![Screenshot 2024-06-26 165913](https://github.com/fersomort/SIEMRegime/assets/111290379/3fc8bb0d-2501-422b-b9c7-a9c2ad44a6d7)
+
+![Screenshot 2024-06-26 165919](https://github.com/fersomort/SIEMRegime/assets/111290379/3a27f5ab-98f7-46d0-8bf0-20abdbd7f5f7)
+
+<p>
+<h5>Data Encryption: </h5>
+Encrypt all data in transit and at rest using AWS Key Management Service (KMS) keys. This  includes encrypting log data, configuration data, and any other sensitive data such as multi-factor authentication. 
+
+<h5>Monitoring and Logging:</h5>
+Monitor and log all network traffic, including security group and network ACL changes, using AWS CloudWatch logs and CloudTrail. Amazon S3 is a popular choice for storing logs because it provides a scalable, durable, and secure storage solution. Amazon CloudWatch Logs is a fully managed log service that collects, monitors, and stores logs from AWS services, including EC2 instances, AWS Lambda functions, and more. <br>
+With this architecture, you can ensure a secure and compliant virtual network architecture for
+your SIEM components in AWS.
+</p>
+
+
+<h4> Trello </h4>
+<hrflink></hrflink>
